@@ -1,0 +1,448 @@
+@import "tailwindcss";
+
+/* ════════════════════════════════════════════════════════════════
+   BASE
+════════════════════════════════════════════════════════════════ */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   KEYFRAMES — ALL 10 REQUIRED ANIMATIONS
+════════════════════════════════════════════════════════════════ */
+
+/* 1. Wave path moving left continuously */
+@keyframes waveMove {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* 2. Bubbles rising bottom → top with fade out */
+@keyframes bubbleRise {
+  0%   { transform: translateY(100vh) scale(0.6); opacity: 0; }
+  10%  { opacity: 0.7; }
+  80%  { opacity: 0.4; }
+  100% { transform: translateY(-120px) scale(1); opacity: 0; }
+}
+
+/* 3. Can floating up-down with gentle rotation */
+@keyframes floatUpDown {
+  0%   { transform: translateY(0px) rotate(-3deg); }
+  25%  { transform: translateY(-12px) rotate(-1deg); }
+  50%  { transform: translateY(-20px) rotate(3deg); }
+  75%  { transform: translateY(-10px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(-3deg); }
+}
+
+@keyframes floatUpDownAlt {
+  0%   { transform: translateY(-20px) rotate(3deg); }
+  25%  { transform: translateY(-10px) rotate(1deg); }
+  50%  { transform: translateY(0px) rotate(-3deg); }
+  75%  { transform: translateY(-12px) rotate(-1deg); }
+  100% { transform: translateY(-20px) rotate(3deg); }
+}
+
+/* 4. Background gradient cycling through ocean colors */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 50% 0%; }
+  50%  { background-position: 100% 50%; }
+  75%  { background-position: 50% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 5. Ripple expanding from hover point */
+@keyframes rippleExpand {
+  0%   { transform: scale(0); opacity: 0.8; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+/* 6. Ice crystal particles rotating around cooling can */
+@keyframes iceRotate {
+  0%   { transform: rotate(0deg) translateX(80px) rotate(0deg); opacity: 0.9; }
+  100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); opacity: 0.9; }
+}
+
+@keyframes iceRotateReverse {
+  0%   { transform: rotate(0deg) translateX(100px) rotate(0deg); opacity: 0.7; }
+  100% { transform: rotate(-360deg) translateX(100px) rotate(360deg); opacity: 0.7; }
+}
+
+/* 7. Cards sliding in from below */
+@keyframes slideInBottom {
+  0%   { transform: translateY(60px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* 8. SVG checkmark drawing itself */
+@keyframes drawCheckmark {
+  0%   { stroke-dashoffset: 200; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* 9. Water splash burst on success */
+@keyframes splashBurst {
+  0%   { transform: scale(0); opacity: 1; }
+  60%  { opacity: 0.6; }
+  100% { transform: scale(3.5); opacity: 0; }
+}
+
+@keyframes splashRing {
+  0%   { transform: scale(0); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* 10. Confetti falling from top */
+@keyframes confettiFall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0.2; }
+}
+
+/* ── Additional animations ─────────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,119,182,0.4), 0 0 40px rgba(0,180,216,0.2); }
+  50%       { box-shadow: 0 0 40px rgba(0,119,182,0.8), 0 0 80px rgba(0,180,216,0.4); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes priceFlash {
+  0%   { color: inherit; transform: scale(1); }
+  30%  { color: #10b981; transform: scale(1.25); }
+  100% { color: inherit; transform: scale(1); }
+}
+
+@keyframes coinFloat {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-80px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes markerPulse {
+  0%   { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes skeletonShimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeSlideIn {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  0%   { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes bounceIn {
+  0%   { transform: scale(0.3); opacity: 0; }
+  50%  { transform: scale(1.1); opacity: 1; }
+  70%  { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+@keyframes waterDrop {
+  0%   { transform: translateY(-10px) scale(0.9); opacity: 0.8; }
+  50%  { transform: translateY(5px) scale(1.05); opacity: 1; }
+  100% { transform: translateY(-10px) scale(0.9); opacity: 0.8; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   OCEAN BACKGROUND (animated gradient)
+════════════════════════════════════════════════════════════════ */
+.ocean-bg {
+  background: linear-gradient(135deg, #03045e 0%, #0077b6 25%, #00b4d8 60%, #90e0ef 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+  position: relative;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   HERO WAVES — 3 SVG Layers
+════════════════════════════════════════════════════════════════ */
+.wave-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wave-svg-1,
+.wave-svg-2,
+.wave-svg-3 {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: auto;
+}
+
+.wave-svg-1 {
+  animation: waveMove 4s linear infinite;
+  opacity: 0.7;
+  fill: #0077B6;
+}
+
+.wave-svg-2 {
+  animation: waveMove 6s linear infinite reverse;
+  opacity: 0.5;
+  fill: #00B4D8;
+  bottom: 10px;
+}
+
+.wave-svg-3 {
+  animation: waveMove 8s linear infinite;
+  opacity: 0.3;
+  fill: #90E0EF;
+  bottom: 20px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   BUBBLES
+════════════════════════════════════════════════════════════════ */
+.bubble-rising {
+  position: absolute;
+  bottom: -50px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(144,224,239,0.2));
+  border: 1px solid rgba(255,255,255,0.3);
+  animation: bubbleRise linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   WATER CAN ANIMATIONS
+════════════════════════════════════════════════════════════════ */
+.animate-float-cooling {
+  animation: floatUpDown 3s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+.animate-float-normal {
+  animation: floatUpDownAlt 3s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+/* Hover ripple */
+.can-ripple-trigger {
+  position: relative;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.can-ripple-trigger::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0, 180, 216, 0.35);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0);
+}
+
+.can-ripple-trigger:hover::after {
+  animation: rippleExpand 0.7s ease-out forwards;
+}
+
+/* Ice crystals around cooling can */
+.ice-crystal-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.ice-crystal-particle {
+  position: absolute;
+  font-size: 18px;
+  transform-origin: 0 0;
+}
+
+.ice-crystal-particle:nth-child(1) { animation: iceRotate 4s linear infinite; }
+.ice-crystal-particle:nth-child(2) { animation: iceRotate 4s linear infinite 1.3s; }
+.ice-crystal-particle:nth-child(3) { animation: iceRotate 4s linear infinite 2.6s; }
+.ice-crystal-particle:nth-child(4) { animation: iceRotateReverse 5s linear infinite 0.5s; }
+.ice-crystal-particle:nth-child(5) { animation: iceRotateReverse 5s linear infinite 2s; }
+
+/* ════════════════════════════════════════════════════════════════
+   SLIDE IN BOTTOM (cards)
+════════════════════════════════════════════════════════════════ */
+.animate-slide-in-bottom {
+  animation: slideInBottom 0.5s ease-out both;
+}
+
+.slide-delay-1 { animation-delay: 0.1s; }
+.slide-delay-2 { animation-delay: 0.2s; }
+.slide-delay-3 { animation-delay: 0.3s; }
+.slide-delay-4 { animation-delay: 0.4s; }
+.slide-delay-5 { animation-delay: 0.5s; }
+.slide-delay-6 { animation-delay: 0.6s; }
+
+/* ════════════════════════════════════════════════════════════════
+   SUCCESS SCREEN ANIMATIONS
+════════════════════════════════════════════════════════════════ */
+.animate-draw-checkmark {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawCheckmark 1.2s ease-out 0.3s forwards;
+}
+
+.animate-splash-burst {
+  animation: splashBurst 1s ease-out forwards;
+}
+
+.animate-splash-ring {
+  animation: splashRing 1.2s ease-out 0.2s forwards;
+}
+
+.splash-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border: 3px solid rgba(0, 180, 216, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.confetti-particle {
+  position: fixed;
+  top: -20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  animation: confettiFall linear forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MAP SKELETON LOADER
+════════════════════════════════════════════════════════════════ */
+.map-skeleton {
+  background: linear-gradient(90deg, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+  border-radius: 1.5rem;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PAYMENT COIN PARTICLES
+════════════════════════════════════════════════════════════════ */
+.coin-particle {
+  position: absolute;
+  font-size: 24px;
+  animation: coinFloat ease-out forwards;
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   GLOW BUTTON
+════════════════════════════════════════════════════════════════ */
+.btn-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PRICE FLASH
+════════════════════════════════════════════════════════════════ */
+.price-flash {
+  animation: priceFlash 0.4s ease-out;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MAP MARKER PULSE
+════════════════════════════════════════════════════════════════ */
+.marker-pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.4);
+  animation: markerPulse 1.5s ease-out infinite;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MISC UTILITIES
+════════════════════════════════════════════════════════════════ */
+.animate-fade-slide {
+  animation: fadeSlideIn 0.5s ease-out both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out both;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.animate-water-drop {
+  animation: waterDrop 2s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 8s linear infinite;
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Screen transition container */
+.screen-transition {
+  animation: fadeSlideIn 0.45s ease-out both;
+}
+
+/* Quantity button effects */
+.qty-btn {
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.qty-btn:active {
+  transform: scale(0.92);
+}
+
+/* QR code glow */
+.qr-glow {
+  box-shadow: 0 0 30px rgba(0,119,182,0.3), 0 0 60px rgba(0,180,216,0.15);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+::-webkit-scrollbar-thumb { background: rgba(0,119,182,0.4); border-radius: 3px; }
