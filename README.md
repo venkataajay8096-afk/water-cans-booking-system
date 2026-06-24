@@ -228,6 +228,81 @@ Free M0 tier is sufficient for development and light production.
 
 ---
 
+## 🛠️ Developer Terminals & CLI Commands
+
+This section lists the CLI commands to manage, test, and build the application locally.
+
+### 1. Multi-Dev Run Terminal (Combined Frontend + Backend)
+To run both backend and frontend concurrently in a single terminal session:
+```bash
+npm run dev:all
+```
+This starts:
+* **Backend API**: `http://localhost:5000`
+* **Vite Frontend**: `http://localhost:5173`
+
+### 2. Standalone Frontend Terminal
+```bash
+cd frontend
+npm run dev
+```
+
+### 3. Standalone Backend Terminal
+```bash
+cd backend
+npm run dev
+```
+
+### 4. Build Commands
+To generate optimized production bundles:
+* **Root Project**: `npm run build`
+* **React Frontend**: `cd frontend && npm run build`
+
+---
+
+## 🗺️ Application Workflows & Flowcharts
+
+### 1. User Booking & Checkout Flowchart
+The following diagram details the sequence of screens, user choices, and deep link interactions:
+
+```mermaid
+graph TD
+    A[HomeScreen] -->|Login/Register| B(MapScreen)
+    B -->|Select Nearby Plant| C(PlantDetailScreen)
+    C -->|Choose Can Types / Qty| D(OrderFormScreen)
+    D -->|Select Payment Method| E(PaymentScreen)
+    
+    E -->|Select Cash| F[Confirm & Create Order]
+    E -->|Select UPI| G[UPI Deep Link / Scan QR]
+    G -->|Confirm Payment| F
+    
+    F --> H[WhatsAppConfirmScreen]
+    H -->|Send Text to Owner| I[WhatsApp Launch via Link]
+    H -->|Skip| J[SuccessScreen]
+    I --> J
+    J --> K[Live Tracking Screen]
+```
+
+### 2. Deep-Link Triggering Flow
+This diagram shows how native device capabilities are accessed directly from the web browser:
+
+```mermaid
+graph TD
+    User([User Clicks Action]) --> Action{Action Type}
+    
+    Action -->|📞 Call Now| CallLink[tel:+91XXXXXXXXXX]
+    CallLink --> Dialer[[Native Device Phone Dialer]]
+    
+    Action -->|💬 WhatsApp| WALink[https://wa.me/...]
+    WALink --> WAApp[[Official WhatsApp App]]
+    
+    Action -->|📱 UPI Payment| UPILink[upi://pay...]
+    UPILink --> UPIApp[[System UPI Chooser GPay/PhonePe]]
+```
+
+---
+
+
 ## 🔑 API Keys Guide
 
 | Service      | Where to Get                          | Used For                    |
